@@ -124,6 +124,7 @@ Plugin 'myusuf3/numbers.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'lfv89/vim-interestingwords'
 Plugin 'Raimondi/delimitMate'
+Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 
 " 插件列表结束
 call vundle#end()
