@@ -47,6 +47,8 @@ nnoremap <Leader>kw <C-W>k
 " 跳转至下方的子窗口
 nnoremap <Leader>jw <C-W>j
 
+imap jj <ESC>
+
 " 定义快捷键在结对符之间跳转
 nmap <Leader>M %
 " 定义快捷键创建窗口
@@ -121,6 +123,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'myusuf3/numbers.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'lfv89/vim-interestingwords'
+Plugin 'Raimondi/delimitMate'
 
 " 插件列表结束
 call vundle#end()
@@ -415,9 +418,9 @@ let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 
 " YCM 补全菜单配色
 " 菜单
-highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
+"highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
 " 选中项
-highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
+"highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
 
 " 补全功能在注释中同样有效
 let g:ycm_complete_in_comments=1
@@ -493,9 +496,9 @@ let NERDTreeAutoDeleteBuffer=1
 map <Leader>bl :MBEToggle<cr>
 
 " buffer 切换快捷键
-map <C-Tab> :MBEbn<cr>
+"map <C-Tab> :MBEbn<cr>
 map <C-l> :MBEbn<cr>
-map <C-S-Tab> :MBEbp<cr>
+"map <C-S-Tab> :MBEbp<cr>
 map <C-h> :MBEbp<cr>
 map <F7> :MBEbp<CR>
 map <F8> :MBEbn<CR>
@@ -617,3 +620,6 @@ nnoremap <silent> N :call WordNavigation('backward')<cr>
 
 let g:interestingWordsTermColors = ['154', '121', '211', '137', '214', '222']
 
+" >>
+" delimitMate 换行自动缩进
+let delimitMate_expand_cr = 1
