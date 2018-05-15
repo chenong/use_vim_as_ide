@@ -111,6 +111,7 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'lilydjwg/fcitx.vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'myusuf3/numbers.vim'
 
 " 插件列表结束
 call vundle#end()
