@@ -125,6 +125,7 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'lfv89/vim-interestingwords'
 Plugin 'Raimondi/delimitMate'
 Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plugin 'ianva/vim-youdao-translater'
 
 " 插件列表结束
 call vundle#end()
@@ -624,3 +625,12 @@ let g:interestingWordsTermColors = ['154', '121', '211', '137', '214', '222']
 " >>
 " delimitMate 换行自动缩进
 let delimitMate_expand_cr = 1
+
+" >>
+" vim-youdao-translater
+" 在普通模式下，按 ctrl+t， 会翻译当前光标下的单词；
+" 在 visual 模式下选中单词或语句，按 ctrl+t，会翻译选择的单词或语句；
+" 点击引导键再点y，d，可以在命令行输入要翻译的单词或语句；
+vnoremap <silent> <C-T> :<C-u>Ydv<CR>
+nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+noremap <leader>yd :<C-u>Yde<CR>
