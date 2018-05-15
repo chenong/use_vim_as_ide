@@ -49,6 +49,9 @@ nnoremap <Leader>jw <C-W>j
 
 " 定义快捷键在结对符之间跳转
 nmap <Leader>M %
+" 定义快捷键创建窗口
+map <leader>\| :vsplit<CR>
+map <leader>_ :split<CR>
 
 " <<
 
@@ -285,6 +288,7 @@ let g:SignatureMap = {
 let tagbar_left=1
 " 设置显示／隐藏标签列表子窗口的快捷键。速记：identifier list by tag
 nnoremap <Leader>ilt :TagbarToggle<CR>
+nnoremap <F3> :TagbarToggle<CR>
 " 设置标签子窗口的宽度
 let tagbar_width=32
 " tagbar 子窗口中不显示冗余帮助信息
@@ -468,6 +472,7 @@ nmap <Leader>man :Man 3 <cword><CR>
 
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
 nmap <Leader>fl :NERDTreeToggle<CR>
+nmap <F4> :NERDTreeToggle<CR>
 " 设置 NERDTree 子窗口宽度
 let NERDTreeWinSize=22
 " 设置 NERDTree 子窗口位置
@@ -489,8 +494,11 @@ map <Leader>bl :MBEToggle<cr>
 
 " buffer 切换快捷键
 map <C-Tab> :MBEbn<cr>
+map <C-l> :MBEbn<cr>
 map <C-S-Tab> :MBEbp<cr>
-
+map <C-h> :MBEbp<cr>
+map <F7> :MBEbp<CR>
+map <F8> :MBEbn<CR>
 " <<
 
 
