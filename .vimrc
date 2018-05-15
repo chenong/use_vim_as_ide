@@ -37,6 +37,7 @@ nmap <Leader>Q :qa!<CR>
 " 设置快捷键遍历子窗口
 " 依次遍历
 nnoremap nw <C-W><C-W>
+nnoremap <Tab> <C-W><C-W>
 " 跳转至右方的窗口
 nnoremap <Leader>lw <C-W>l
 " 跳转至方的窗口
@@ -65,6 +66,7 @@ set ignorecase
 
 " 关闭兼容模式
 set nocompatible
+set backspace=indent,eol,start
 
 " vim 自身命令行模式智能补全
 set wildmenu
@@ -116,8 +118,8 @@ filetype plugin indent on
 
 " 配色方案
 set background=dark
-colorscheme solarized
-"colorscheme molokai
+"colorscheme solarized
+colorscheme molokai
 "colorscheme phd
 
 " >>
