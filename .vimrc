@@ -71,6 +71,10 @@ set backspace=indent,eol,start
 " vim 自身命令行模式智能补全
 set wildmenu
 
+" 自动跳转到上次打开文件的位置
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 " <<
 
 " >>>>
