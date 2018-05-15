@@ -126,6 +126,7 @@ Plugin 'lfv89/vim-interestingwords'
 Plugin 'Raimondi/delimitMate'
 Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plugin 'ianva/vim-youdao-translater'
+Plugin 'tenfyzhong/CompleteParameter.vim'
 
 " 插件列表结束
 call vundle#end()
@@ -451,6 +452,10 @@ let g:ycm_cache_omnifunc=0
 " 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
 
+let g:ycm_semantic_triggers =  {
+  \   'c' : ['->', '.', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'g', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
+  \ }
+
 " <<
  
 " >>
@@ -634,3 +639,11 @@ let delimitMate_expand_cr = 1
 vnoremap <silent> <C-T> :<C-u>Ydv<CR>
 nnoremap <silent> <C-T> :<C-u>Ydc<CR>
 noremap <leader>yd :<C-u>Yde<CR>
+
+" >>
+" CompleteParameter.vim
+inoremap <silent><expr> ( complete_parameter#pre_complete("()")
+smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
