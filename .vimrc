@@ -109,7 +109,7 @@ Plugin 'dyng/ctrlsf.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-scripts/DrawIt'
-Plugin 'SirVer/ultisnips'
+"Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'derekwyatt/vim-protodef'
 Plugin 'scrooloose/nerdtree'
@@ -127,6 +127,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plugin 'ianva/vim-youdao-translater'
 Plugin 'tenfyzhong/CompleteParameter.vim'
+Plugin 'git://github.com/edkolev/tmuxline.vim.git'
 
 " 插件列表结束
 call vundle#end()
@@ -190,11 +191,9 @@ set hlsearch
 " >>
 " 其他美化
 
-" 设置 gvim 显示字体
-set guifont=YaHei\ Consolas\ Hybrid\ 10.5
-
 " 禁止折行
-set nowrap
+" set nowrap
+set wrap
 
 " 设置状态栏主题风格
 let g:Powerline_colorscheme='solarized256'
@@ -346,11 +345,18 @@ let g:tagbar_type_cpp = {
 " 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v
 " 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
 let g:indexer_ctagsCommandLineOptions="--c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
+"let g:indexer_backgroundDisabled=1
+let g:indexer_dontUpdateTagsIfFileExists=1
+let g:indexer_ctagsJustAppendTagsAtFileSave=1
+let g:indexer_useSedWhenAppend=1
+
 
 " 正向遍历同名标签
 nmap <Leader>tn :tnext<CR>
 " 反向遍历同名标签
 nmap <Leader>tp :tprevious<CR>
+" 跳转时有多个结果则列出来，而不是默认跳转第一个
+nmap <c-]> g<c-]>
 
 " 基于语义的代码导航
 
@@ -364,8 +370,13 @@ nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 " 查找
 
 " 使用 ctrlsf.vim 插件在工程内全局查找光标所在关键字，设置快捷键。快捷键速记法：search in project
-nnoremap <Leader>sp :CtrlSF<CR>
-
+nnoremap <Leader>sk :CtrlSF<CR>
+nnoremap <Leader>sp :CtrlSF 
+nnoremap <Leader>so :CtrlSFOpen<CR>
+let g:ctrlsf_auto_focus = {
+    \ "at": "start"
+    \ }
+let g:ctrlsf_default_root = 'project'
 " <<
 
 " >>
@@ -502,6 +513,8 @@ let NERDTreeAutoDeleteBuffer=1
 " 显示/隐藏 MiniBufExplorer 窗口
 map <Leader>bl :MBEToggle<cr>
 
+let g:miniBufExplorerMoreThanOne=0
+
 " buffer 切换快捷键
 "map <C-Tab> :MBEbn<cr>
 map <C-l> :MBEbn<cr>
@@ -563,13 +576,13 @@ nmap <Leader>f :CtrlPMRUFiles<CR>
 nmap <Leader>b :CtrlPBuffer<CR>
 "设置搜索时忽略的文件
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm|build)|build$',
     \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
     \ }
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 'rw'
 let g:ctrlp_match_window_bottom = 1
 "修改QuickFix窗口显示的最大条目数
-let g:ctrlp_max_height = 15
+let g:ctrlp_max_height = 25
 let g:ctrlp_match_window_reversed = 0
 "设置MRU最大条目数为500
 let g:ctrlp_mruf_max = 500
@@ -583,9 +596,9 @@ let g:ctrlp_line_prefix = '♪ '
 
 "调用ag进行搜索提升速度，同时不使用缓存文件
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
+  "set grepprg=ag\ --nogroup\ --nocolor
+  "let g:ctrlp_user_command = 'ag %s -l --nocolor –hidden -g ""'
+  "let g:ctrlp_use_caching = 0
 endif
 
 
@@ -636,14 +649,14 @@ let delimitMate_expand_cr = 1
 " 在普通模式下，按 ctrl+t， 会翻译当前光标下的单词；
 " 在 visual 模式下选中单词或语句，按 ctrl+t，会翻译选择的单词或语句；
 " 点击引导键再点y，d，可以在命令行输入要翻译的单词或语句；
-vnoremap <silent> <C-T> :<C-u>Ydv<CR>
-nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+" vnoremap <silent> <C-T> :<C-u>Ydv<CR>
+" nnoremap <silent> <C-T> :<C-u>Ydc<CR>
 noremap <leader>yd :<C-u>Yde<CR>
 
 " >>
 " CompleteParameter.vim
 inoremap <silent><expr> ( complete_parameter#pre_complete("()")
-smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+smap <c-k> <Plug>(complete_parameter#goto_next_parameter)
+imap <c-k> <Plug>(complete_parameter#goto_next_parameter)
+smap <c-j> <Plug>(complete_parameter#goto_previous_parameter)
+imap <c-j> <Plug>(complete_parameter#goto_previous_parameter)
